@@ -1,72 +1,90 @@
-import React, {useEffect, useState} from 'react';
-import {Link, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+
+const NavBarMenu = (props) => {
+    return (
+        <li className="nav-item">
+            <Link to={ props.url } className={ props.toggled ? "nav-link" : "nav-link collapsed" }>
+                <i className={ 'fas fa-fw ' + props.icon }></i>
+                <span>{ props.name }</span>
+            </Link>
+        </li>
+    )
+};
+
+const NavBarMenuWithSubmenus = (props) => {
+    return (
+        <li className="nav-item">
+            <span className={ props.toggled ? "nav-link c-pointer" : "nav-link c-pointer collapsed" } onClick={ () => {
+                if (props.submenusToggled.includes(props.id)) {
+                    props.setSubmenusToggled(props.submenusToggled.filter(menu => menu !== props.id));
+                } else {
+                    props.setSubmenusToggled(...props.submenusToggled, [props.id]);
+                }
+            }}>
+                <i className={ 'fas fa-fw ' + props.icon }></i>
+                <span>{ props.name }</span>
+            </span>
+            <div className={ props.submenusToggled.includes(props.id) ? "collapse show" : "collapse"}>
+                { props.children }
+            </div>
+        </li>
+    )
+};
+
+const NavBarHeading = (props) => <div className="sidebar-heading">{ props.text }</div>;
 
 const NavBar = () => {
 
     const [menuToggled, setMenuToggled] = useState(false);
     const [submenusToggled, setSubmenusToggled] = useState([]);
 
+    const doToggleMenu = () => {
+        setSubmenusToggled([]);
+        setMenuToggled(!menuToggled);
+    };
+
+    const location = useLocation();
+
+    useEffect(() => {
+        if (menuToggled) {
+            setSubmenusToggled([]);
+        }
+    }, [location]);
+
     return (
         <nav>
-            <ul className={
-                menuToggled
-                    ? "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled"
-                    : "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
-                }
-                id="accordionSidebar">
+            <ul className={ "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion " + (menuToggled ? 'toggled' : '')}>
                 <a className="sidebar-brand d-flex align-items-center justify-content-center" href="/">
                     <div className="sidebar-brand-icon rotate-n-15">
                         <i className="fas fa-laugh-wink"></i>
                     </div>
                     <div className="sidebar-brand-text mx-3">Admin Panel</div>
                 </a>
+
                 <hr className="sidebar-divider my-0"/>
 
-                <li className="nav-item">
-                    <Link to="/" className={ menuToggled ? "nav-link" : "nav-link collapsed" }>
-                        <i className="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span>
-                    </Link>
-                </li>
+                <NavBarMenu name="Dashboard" url="/" icon="fa-tachometer-alt" toggled={menuToggled} />
 
-                <div className="sidebar-heading">
-                    Statistics
-                </div>
+                <NavBarHeading text="Statistics" />
 
-                <li className="nav-item">
-                    <Link to="/daily" className={ menuToggled ? "nav-link" : "nav-link collapsed" }>
-                        <i className="fas fa-fw fa-table"></i>
-                        <span>Daily</span>
-                    </Link>
-                </li>
+                <NavBarMenu name="Daily" url="/daily" icon="fa-table" toggled={menuToggled} />
 
-                <li className="nav-item">
-                    <span className={ menuToggled ? "nav-link c-pointer" : "nav-link c-pointer collapsed" } onClick={ () => {
-                        if (submenusToggled.includes('monthly')) {
-                            setSubmenusToggled(submenusToggled.filter(menu => menu !== 'monthly'));
-                        } else {
-                            setSubmenusToggled(...submenusToggled, ['monthly']);
-                        }
-                    }}>
-                        <i className="fas fa-fw fa-table"></i>
-                        <span>Monthly</span>
-                    </span>
-                    <div className={ submenusToggled.includes('monthly') ? "collapse show" : "collapse"}>
-                        <div className="bg-white py-2 collapse-inner rounded">
-                            <h6 className="collapse-header">Android:</h6>
-                            <Link to="/monthly/purchases" className="collapse-item">Purchases</Link>
-                            <Link to="/monthly/retention" className="collapse-item">Retention</Link>
-                        </div>
+                <NavBarMenuWithSubmenus
+                    name="Monthly" icon="fa-table" id="monthly"
+                    toggled={menuToggled} submenusToggled={submenusToggled} setSubmenusToggled={setSubmenusToggled}
+                >
+                    <div className="bg-white py-2 collapse-inner rounded">
+                        <h6 className="collapse-header">Android</h6>
+                        <Link to="/monthly/purchases" className="collapse-item">Purchases</Link>
+                        <Link to="/monthly/retention" className="collapse-item">Retention</Link>
                     </div>
-                </li>
+                </NavBarMenuWithSubmenus>
 
-                <hr className="sidebar-divider d-none d-md-block" />
+                <hr className="sidebar-divider d-none d-md-block"/>
 
                 <div className="text-center d-none d-md-inline">
-                    <button className="rounded-circle border-0" id="sidebarToggle" onClick={() => {
-                        setSubmenusToggled([]);
-                        setMenuToggled(!menuToggled);
-                    }}></button>
+                    <button className="rounded-circle border-0" id="sidebarToggle" onClick={doToggleMenu}></button>
                 </div>
             </ul>
         </nav>
