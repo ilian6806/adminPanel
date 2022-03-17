@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 const NavBarMenu = (props) => {
     return (
-        <li className="nav-item">
+        <li className={props.pathname === props.url ? 'nav-item active' : 'nav-item'}>
             <Link to={ props.url } className={ props.toggled ? "nav-link" : "nav-link collapsed" }>
                 <i className={ 'fas fa-fw ' + props.icon }></i>
                 <span>{ props.name }</span>
@@ -30,6 +30,12 @@ const NavBarMenuWithSubmenus = (props) => {
             </div>
         </li>
     )
+};
+
+const NavBarSubmenu = (props) => {
+    return (
+        <Link to={props.url} className={props.pathname === props.url ? 'collapse-item active' : 'collapse-item'}>{ props.name }</Link>
+    );
 };
 
 const NavBarHeading = (props) => <div className="sidebar-heading">{ props.text }</div>;
@@ -64,7 +70,10 @@ const NavBar = () => {
     }, [location]);
 
     return (
-        <nav>
+        <nav className="main-nav">
+            <button id="sidebarToggleTop" className="btn btn-link d-md-none rounded-circle mr-3" onClick={doToggleMenu}>
+                <i className="fa fa-bars"></i>
+            </button>
             <ul className={ "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion " + (menuToggled ? 'toggled' : '')}>
                 <a className="sidebar-brand d-flex align-items-center justify-content-center" href="/">
                     <div className="sidebar-brand-icon rotate-n-15">
@@ -75,20 +84,20 @@ const NavBar = () => {
 
                 <hr className="sidebar-divider my-0"/>
 
-                <NavBarMenu name="Dashboard" url="/" icon="fa-tachometer-alt" toggled={menuToggled} />
+                <NavBarMenu name="Dashboard" url="/" icon="fa-tachometer-alt" pathname={location.pathname} toggled={menuToggled} />
 
                 <NavBarHeading text="Statistics" />
 
-                <NavBarMenu name="Daily" url="/daily" icon="fa-table" toggled={menuToggled} />
+                <NavBarMenu name="Daily" url="/daily" icon="fa-table" pathname={location.pathname} toggled={menuToggled} />
 
                 <NavBarMenuWithSubmenus
-                    name="Monthly" icon="fa-table" id="monthly"
+                    name="Monthly" icon="fa-table" id="monthly" pathname={location.pathname}
                     toggled={menuToggled} submenusToggled={submenusToggled} setSubmenusToggled={setSubmenusToggled}
                 >
                     <div className="bg-white py-2 collapse-inner rounded">
                         <h6 className="collapse-header">Android</h6>
-                        <Link to="/monthly/purchases" className="collapse-item">Purchases</Link>
-                        <Link to="/monthly/retention" className="collapse-item">Retention</Link>
+                        <NavBarSubmenu name="Purchases" url="/monthly/purchases" pathname={location.pathname} />
+                        <NavBarSubmenu name="Retention" url="/monthly/retention" pathname={location.pathname} />
                     </div>
                 </NavBarMenuWithSubmenus>
 
