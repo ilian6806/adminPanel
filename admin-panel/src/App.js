@@ -10,6 +10,7 @@ import Header from "./components/header/header.component";
 import Dashboard from "./pages/dashboard/dashboard.component";
 import Daily from "./pages/daily/daily.component";
 import Monthly from "./pages/monthly/monthly.component";
+import NotFound from "./pages/not-found/not-found.component";
 
 function App() {
   return (
@@ -21,10 +22,11 @@ function App() {
                       <Header />
                       <div className="container-fluid">
                           <Routes>
-                              <Route path='/' element={<Dashboard />}/>
-                              <Route path='/daily' element={<Daily />}/>
-                              <Route path='/monthly/' element={<Monthly />}/>
-                              <Route path='/monthly/:type' element={<Monthly />}/>
+                              <Route path='/' element={<Dashboard />} />
+                              <Route path='/daily' element={<Daily />} />
+                              <Route path='/monthly/' element={<Monthly />} />
+                              <Route path='/monthly/:type' element={<Monthly />} />
+                              <Route path='*' element={<NotFound/>} />
                           </Routes>
                       </div>
                   </div>

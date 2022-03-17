@@ -36,12 +36,23 @@ const NavBarHeading = (props) => <div className="sidebar-heading">{ props.text }
 
 const NavBar = () => {
 
-    const [menuToggled, setMenuToggled] = useState(false);
+    let toggleSetting = localStorage.getItem('menuToggled');
+    if (! toggleSetting) {
+        toggleSetting = false;
+        localStorage.setItem('menuToggled', toggleSetting);
+    }
+
+    const [menuToggled, setMenuToggledRef] = useState(toggleSetting === 'true');
     const [submenusToggled, setSubmenusToggled] = useState([]);
+
+    const setMenuToggled = (value) => {
+        setMenuToggledRef(value);
+        localStorage.setItem('menuToggled', value);
+    };
 
     const doToggleMenu = () => {
         setSubmenusToggled([]);
-        setMenuToggled(!menuToggled);
+        setMenuToggled(! menuToggled);
     };
 
     const location = useLocation();
