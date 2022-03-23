@@ -5,10 +5,13 @@ import './vendor/fontawesome-free/css/all.min.css';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { UserProvider } from "./contexts/user.context";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <UserProvider>
+          <App />
+      </UserProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

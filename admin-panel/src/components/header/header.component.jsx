@@ -1,9 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { useLocation } from 'react-router-dom';
 import defaultAvatar from '../../assets/images/default-avatar.jpg'
+import { signOutUser } from "../../utils/firebase/firebase.utils";
+import { UserContext } from "../../contexts/user.context";
 
 const Header = () => {
 
+    const { currentUser } = useContext(UserContext);
     const [profileMenuToggled, setProfileMenuToggled] = useState(false);
     const location = useLocation();
 
@@ -33,31 +36,31 @@ const Header = () => {
                             setProfileMenuToggled(!profileMenuToggled);
                         }}>
                         <div>
-                        <span className="mr-2 d-none d-lg-inline text-gray-600 small">Ilian Iliev</span>
-                        <img className="img-profile rounded-circle" src={defaultAvatar}/>
+                        <span className="mr-2 d-none d-lg-inline text-gray-600 small">{ currentUser.displayName }</span>
+                        <img className="img-profile rounded-circle" src={ currentUser.photoURL ? currentUser.photoURL : defaultAvatar } />
                         </div>
                     </a>
                     <div className={ profileMenuToggled ?
                             "dropdown-menu dropdown-menu-right shadow animated--grow-in show" :
                             "dropdown-menu dropdown-menu-right shadow animated--grow-in"
                         }>
-                        <a className="dropdown-item" href="#">
-                            <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Profile
-                        </a>
-                        <a className="dropdown-item" href="#">
-                            <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Settings
-                        </a>
-                        <a className="dropdown-item" href="#">
-                            <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Activity Log
-                        </a>
-                        <div className="dropdown-divider"></div>
-                        <a className="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                        {/*<a className="dropdown-item" href="#">*/}
+                        {/*    <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>*/}
+                        {/*    Profile*/}
+                        {/*</a>*/}
+                        {/*<a className="dropdown-item" href="#">*/}
+                        {/*    <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>*/}
+                        {/*    Settings*/}
+                        {/*</a>*/}
+                        {/*<a className="dropdown-item" href="#">*/}
+                        {/*    <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>*/}
+                        {/*    Activity Log*/}
+                        {/*</a>*/}
+                        {/*<div className="dropdown-divider"></div>*/}
+                        <span className="dropdown-item c-pointer" onClick={signOutUser}>
                             <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                             Logout
-                        </a>
+                        </span>
                     </div>
                 </li>
             </ul>
