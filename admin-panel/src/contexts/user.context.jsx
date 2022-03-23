@@ -9,15 +9,18 @@ export const UserContext = createContext({
 export const UserProvider = ({ children }) => {
 
     const [currentUser, setCurrentUser] = useState(null);
-    const value = { currentUser, setCurrentUser };
+    const [initialized, setInitialized] = useState(false);
+
+    let value = { currentUser, setCurrentUser, initialized, setInitialized };
 
     useEffect(() => {
         return onAuthStateChangedListener((user) => {
-            if (user) {
-                setCurrentUser(user);
-            } else {
-                setCurrentUser(null);
-            }
+                setInitialized(true);
+                if (user) {
+                    setCurrentUser(user);
+                } else {
+                    setCurrentUser(null);
+                }
         });
     }, [currentUser]);
 

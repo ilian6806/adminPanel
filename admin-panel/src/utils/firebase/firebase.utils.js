@@ -21,7 +21,8 @@ const app = initializeApp(firebaseConfig);
 
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({
-   prompt: 'select_account'
+    prompt: 'select_account',
+    hd: 'imperiaonline.org' // use Firebase function for this in production
 });
 
 export const auth = getAuth();
