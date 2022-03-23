@@ -4507,6 +4507,7 @@ input[type="button"].btn-block {
   background-clip: border-box;
   border: 1px solid #e3e6f0;
   border-radius: 0.35rem;
+  overflow: hidden;
 }
 
 .card > hr {
@@ -10336,6 +10337,7 @@ a:focus {
 .sidebar {
   width: 6.5rem;
   min-height: 100vh;
+  height: 100%;
 }
 
 .sidebar .nav-item {
@@ -11297,7 +11299,7 @@ body.sidebar-toggled footer.sticky-footer {
 }
 
 .c-pointer {
-  cursor: pointer;;
+  cursor: pointer;
 }
 
 .main-nav {

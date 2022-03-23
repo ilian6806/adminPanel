@@ -1,0 +1,37 @@
+.custom-table-container {
+    width: auto;
+    max-width: 100%;
+    display: inline-block;
+    &.full-width {
+        width: 100%;
+        max-width: 100%;
+        display: block;
+    }
+}
+
+.rdt_Table {
+    width: auto !important;
+}
+
+.rdt_TableHeader {
+    font-size: 16px !important;
+}
+
+.rdt_TableHeader div:first-child {
+    color: #4e73df !important;
+    font-weight: 700 !important;
+}
+
+.rdt_TableCol_Sortable {
+    justify-content: space-between !important;
+}
+
+.rdt_TableCol,
+.rdt_TableCell {
+    box-sizing: border-box !important;
+}
+
+.rdt_TableCol div,
+.rdt_TableCell div {
+    white-space: normal !important;
+}

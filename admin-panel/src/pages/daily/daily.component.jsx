@@ -1,10 +1,16 @@
 import React from 'react';
+import CustomDataTable from "../../components/custom-data-table/custom-data-table.component";
+import testData from "../../test-data/payments"
 
 const Daily = () => {
     return (
-        <div className="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 className = "h3 mb-0 text-gray-800">Daily</h1>
-        </div>
+        <CustomDataTable
+            title="Daily"
+            columns={testData.columns}
+            data={testData.data}
+            pagination
+            fullWidth
+        />
     )
 };
 

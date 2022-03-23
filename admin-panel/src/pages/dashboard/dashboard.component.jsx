@@ -1,53 +1,26 @@
 import React from 'react';
-import DataTable from 'react-data-table-component';
+import CustomDataTable from "../../components/custom-data-table/custom-data-table.component";
+import testPaymentsData from "../../test-data/payments"
+import testPaymentsMonthData from "../../test-data/payments-month"
 
 const Dashboard = () => {
-    const columns = [
-        {
-            name: 'Title',
-            selector: row => row.title,
-        },
-        {
-            name: 'Year',
-            selector: row => row.year,
-        },
-    ];
-
-    const data = [
-        {
-            id: 1,
-            title: 'Beetlejuice',
-            year: '1988',
-        },
-        {
-            id: 2,
-            title: 'Ghostbusters',
-            year: '1984',
-        },
-    ];
-
-
-    const paginationComponentOptions = {
-        rowsPerPageText: 'Pages',
-        rangeSeparatorText: 'of',
-        selectAllRowsItem: true,
-        selectAllRowsItemText: 'Todos',
-    };
-
     return (
         <div>
             <div className="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 className = "h3 mb-0 text-gray-800">Dashboard</h1>
+                <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
             </div>
-            <div>
-                <DataTable
-                    title="Daily"
-                    columns={columns}
-                    data={data}
-                    pagination
-                    paginationComponentOptions={paginationComponentOptions}
-                />
-            </div>
+            <CustomDataTable
+                title="Per Month"
+                columns={testPaymentsMonthData.columns}
+                data={testPaymentsMonthData.data}
+            />
+            <CustomDataTable
+                title="Payments"
+                columns={testPaymentsData.columns}
+                data={testPaymentsData.data}
+                pagination
+                fullWidth
+            />
         </div>
     )
 };
