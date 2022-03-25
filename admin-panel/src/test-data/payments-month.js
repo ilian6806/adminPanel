@@ -12,6 +12,22 @@ let data = {
             "month": "01.2020",
             "totalNetUSD": 27872,
         },
+        {
+            "month": "12.2019",
+            "totalNetUSD": 28752,
+        },
+        {
+            "month": "11.2019",
+            "totalNetUSD": 24871,
+        },
+        {
+            "month": "10.2019",
+            "totalNetUSD": 26872,
+        },
+        {
+            "month": "09.2019",
+            "totalNetUSD": 23729,
+        },
     ]
 };
 

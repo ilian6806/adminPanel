@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import logo from '../../assets/images/io_logo.png'
+import './navbar.component.scss'
 
 const NavBarMenu = (props) => {
     return (
@@ -76,10 +78,11 @@ const NavBar = () => {
             </button>
             <ul className={ "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion " + (menuToggled ? 'toggled' : '')}>
                 <a className="sidebar-brand d-flex align-items-center justify-content-center" href="/">
-                    <div className="sidebar-brand-icon rotate-n-15">
-                        <i className="fas fa-laugh-wink"></i>
+                    <div className="sidebar-brand-icon">
+                        {/*<i className="fas fa-laugh-wink"></i>*/}
+                        <img src={logo} alt=""/>
                     </div>
-                    <div className="sidebar-brand-text mx-3">Admin Panel</div>
+                    {/*<div className="sidebar-brand-text mx-3">Admin Panel</div>*/}
                 </a>
 
                 <hr className="sidebar-divider my-0"/>
