@@ -1,27 +1,12 @@
 import React, { useEffect, useState } from "react";
-import CustomDataTable from "../../components/custom-data-table/custom-data-table.component";
+
 import Badge from "../../components/badge/badge.component";
 import CustomLineChart from "../../components/custom-line-chart/custom-line-chart.component";
 import CustomPieChart from "../../components/custom-pie-chart/custom-pie-chart.component";
-import fetchData from "../../utils/fetch/fetch.utils"
+import PaymentsDailyTableWithData from "../../components/tables/payments/payments-daily-with-data.component";
+import PaymentsMonthlyTableWithData from "../../components/tables/payments/payments-monthly-with-data.component";
 
 const Dashboard = () => {
-
-    const [testPaymentsData, setTestPaymentsData] = useState({ data: [], loading: true });
-    const [testPaymentsMonthData, setTestPaymentsMonthData] = useState({ data: [], loading: true });
-
-    useEffect(() => {
-        fetchData('/payments', (response) => {
-            setTestPaymentsData({ data: response, loading: false });
-        });
-    }, []);
-
-    useEffect(() => {
-        fetchData('/paymentsMonthly', (response) => {
-            setTestPaymentsMonthData({ data: response, loading: false });
-        });
-    }, []);
-
 
     return (
         <div>
@@ -34,22 +19,9 @@ const Dashboard = () => {
                 <Badge title="RETENTION (FIRST DAY)" progress="22" color="info" icon="comments" />
             </div>
             <div className="row">
-                <CustomDataTable
-                    title="Per Month"
-                    columns={[
-                        {
-                            name: 'Month',
-                            selector: row => row.month,
-                        },
-                        {
-                            name: 'Total Net USD',
-                            selector: row => row.totalNetUSD,
-                            right: true,
-                        }
-                    ]}
-                    data={testPaymentsMonthData.data}
-                    progressPending={testPaymentsData.loading}
-                />
+
+                <PaymentsMonthlyTableWithData />
+
                 <CustomLineChart title="Earnings Overview" legend data={{
                     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
                     datasets: [
@@ -88,56 +60,7 @@ const Dashboard = () => {
                 }}/>
             </div>
             <div className="row">
-                <CustomDataTable
-                    title="Payments"
-                    columns={[
-                        {
-                            name: 'Offer Id',
-                            selector: row => row.promoName,
-                            sortable: true,
-                            minWidth: '600px'
-                        },
-                        {
-                            name: 'Price USD',
-                            selector: row => row.priceUSD,
-                            sortable: true,
-                            right: true,
-                        },
-                        {
-                            name: 'Orders',
-                            selector: row => row.orders,
-                            sortable: true,
-                            right: true,
-                        },
-                        {
-                            name: 'Unique',
-                            selector: row => row.uniqueBuyers,
-                            sortable: true,
-                            right: true,
-                        },
-                        {
-                            name: 'Total USD',
-                            selector: row => row.totalUSD,
-                            sortable: true,
-                            right: true,
-                        },
-                        {
-                            name: 'Total Net USD',
-                            selector: row => row.totalNetUSD,
-                            sortable: true,
-                            right: true,
-                        },
-                        {
-                            name: 'Ratio',
-                            selector: row => row.ratio,
-                            minWidth: '200px'
-                        },
-                    ]}
-                    data={testPaymentsData.data}
-                    progressPending={testPaymentsData.loading}
-                    pagination
-                    fullWidth
-                />
+                <PaymentsDailyTableWithData />
             </div>
         </div>
     )
