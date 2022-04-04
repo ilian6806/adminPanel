@@ -13,6 +13,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: adminPanel/admin-panel
 
     strategy:
       matrix:
@@ -24,8 +27,8 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Go to root dir
-      run: cd admin-panel && ls
+#    - name: Go to root dir
+#      run: cd admin-panel && pwd
 
     - name: Setup Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
