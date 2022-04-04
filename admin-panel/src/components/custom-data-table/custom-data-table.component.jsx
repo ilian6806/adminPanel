@@ -1,6 +1,7 @@
 import React from 'react';
 import DataTable from 'react-data-table-component';
 import './custom-data-table.component.scss'
+import Spinner from "../common/spinner/spinner.component";
 
 const paginationComponentOptions = {
     rowsPerPageText: 'Pages',
@@ -91,6 +92,8 @@ const CustomDataTable = (props) => {
                 data={props.data}
                 customStyles={customStyles}
                 pagination={props.pagination}
+                progressPending={props.progressPending}
+                progressComponent={<Spinner inner />}
                 dense
                 striped
                 paginationComponentOptions={paginationComponentOptions}

@@ -31,13 +31,13 @@ const Header = () => {
 
             <ul className="navbar-nav ml-auto">
                 <li className="nav-item dropdown no-arrow">
-                    <a className="nav-link" href="" onClick={ evt => {
+                    <a className="nav-link" href="/" onClick={ evt => {
                             evt.preventDefault();
                             setProfileMenuToggled(!profileMenuToggled);
                         }}>
                         <div>
                         <span className="mr-2 d-none d-lg-inline text-gray-600 small">{ currentUser.displayName }</span>
-                        <img className="img-profile rounded-circle" src={ currentUser.photoURL ? currentUser.photoURL : defaultAvatar } />
+                        <img className="img-profile rounded-circle" alt="" src={ currentUser.photoURL ? currentUser.photoURL : defaultAvatar } />
                         </div>
                     </a>
                     <div className={ profileMenuToggled ?

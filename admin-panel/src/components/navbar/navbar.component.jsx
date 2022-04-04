@@ -69,7 +69,7 @@ const NavBar = () => {
         if (menuToggled) {
             setSubmenusToggled([]);
         }
-    }, [location]);
+    }, [location, menuToggled]);
 
     return (
         <nav className="main-nav">

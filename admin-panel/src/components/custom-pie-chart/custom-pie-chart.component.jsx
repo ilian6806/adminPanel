@@ -1,7 +1,18 @@
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import {Line, Pie} from 'react-chartjs-2';
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+import { Pie } from 'react-chartjs-2';
+
+import {
+    Chart as ChartJS,
+    ArcElement,
+    Tooltip,
+    Legend
+} from 'chart.js';
+
+ChartJS.register(
+    ArcElement,
+    Tooltip,
+    Legend
+);
 
 
 const CustomPieChart = (props) => {
