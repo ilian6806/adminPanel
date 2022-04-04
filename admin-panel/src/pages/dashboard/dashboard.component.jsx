@@ -5,13 +5,45 @@ import CustomLineChart from "../../components/custom-line-chart/custom-line-char
 import CustomPieChart from "../../components/custom-pie-chart/custom-pie-chart.component";
 import PaymentsDailyTableWithData from "../../components/tables/payments/payments-daily-with-data.component";
 import PaymentsMonthlyTableWithData from "../../components/tables/payments/payments-monthly-with-data.component";
+import Modal, {ModalHeader, ModalBody, ModalFooter} from "../../components/common/modal/modal.component";
+import Button from "../../components/common/button/button.component";
+import ButtonWithConfirmation from "../../components/common/button-with-confirmation/button-with-confirmation.component";
+
 
 const Dashboard = () => {
+
+    const [showModal, setShowModal] = useState(false);
 
     return (
         <div>
             <div className="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
+                <div className="d-inline-block">
+                    <Button primary sm onClick={() => setShowModal(true)}>
+                        <i className="fas fa-download fa-sm text-white-50"></i> Generate Report
+                    </Button>
+                    <Modal show={showModal} setShow={setShowModal}>
+                        <ModalHeader>Modal header</ModalHeader>
+                        <ModalBody>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                Deserunt maxime dolorem asperiores laboriosam ad delectus ea.
+                                Tempora tempore repellendus laudantium fugiat saepe mollitia eius illo possimus laborum consequuntur,
+                                tenetur neque.
+                            </p>
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button onClick={() => setShowModal(false)}>Close</Button>
+                        </ModalFooter>
+                    </Modal>
+                    <ButtonWithConfirmation
+                        danger sm
+                        actionName="Delete"
+                        action={() => { console.log('Deleted'); }}
+                        text="Are you sure you want to delete old reports?"
+                    >Delete Reports
+                    </ButtonWithConfirmation>
+                </div>
             </div>
             <div className="row">
                 <Badge title="EARNINGS (MONTHLY)" value="$40,000" />
