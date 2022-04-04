@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import Badge from "../../components/badge/badge.component";
 import CustomLineChart from "../../components/custom-line-chart/custom-line-chart.component";
