@@ -104,3 +104,6 @@ dist
 .tern-port
 
 .idea
+
+admin-panel/build
+admin-panel/node_modules/
