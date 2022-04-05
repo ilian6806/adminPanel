@@ -10,3 +10,5 @@ npm install
 npm start
 ```
 Simple as that.
+
+[MIT License](LICENSE.md) © [Ilian Iliev](https://ilian-iliev.com/)
