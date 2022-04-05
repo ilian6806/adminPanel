@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import fetchData from "../../../utils/fetch/fetch.utils";
+import send from "../../../utils/fetch/fetch.utils";
 import PaymentsMonthlyTable from "./payments-monthly.components";
 
 const PaymentsMonthlyTableWithData = (props) => {
@@ -7,7 +7,7 @@ const PaymentsMonthlyTableWithData = (props) => {
     const [testPaymentsMonth, setTestPaymentsMonth] = useState({ data: [], loading: true });
 
     useEffect(() => {
-        fetchData('/paymentsMonthly', (response) => {
+        send('/paymentsMonthly').then(response => {
             setTestPaymentsMonth({ data: response, loading: false });
         });
     }, []);

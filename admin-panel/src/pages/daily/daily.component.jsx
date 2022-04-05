@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import CustomDataTable from "../../components/custom-data-table/custom-data-table.component";
 import Spinner from "../../components/common/spinner/spinner.component";
-import fetchData from "../../utils/fetch/fetch.utils"
+import send from "../../utils/fetch/fetch.utils"
 
 const Daily = () => {
 
@@ -9,7 +9,7 @@ const Daily = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        fetchData('/payments', (response) => {
+        send('/payments').then(response => {
             setData(response);
             setIsLoading(false);
         });

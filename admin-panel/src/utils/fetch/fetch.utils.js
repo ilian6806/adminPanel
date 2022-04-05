@@ -1,10 +1,31 @@
+import 'unfetch/polyfill'
 
-const BASE_URL = 'http://localhost:4000';
+function send(endpoint, { data, ...customConfig} = {}) {
 
-const fetchData = async (url, callback) => {
-    const response = await fetch(BASE_URL + url);
-    const data = await response.json();
-    callback(data);
-};
+    const headers = { 'content-type': 'application/json' };
+    const config = {
+        method: data ? 'POST' : 'GET',
+        ...customConfig,
+        headers: {
+            ...headers,
+            ...customConfig.headers,
+        },
+    };
 
-export default fetchData;
+    if (data) {
+        config.body = JSON.stringify(data)
+    }
+
+    return window
+        .fetch(`${process.env.REACT_APP_API_URL}${endpoint}`, config)
+        .then(async response => {
+            if (response.ok) {
+                return await response.json()
+            } else {
+                const errorMessage = await response.text();
+                return Promise.reject(new Error(errorMessage))
+            }
+        });
+}
+
+export default send;
