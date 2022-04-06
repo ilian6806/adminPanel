@@ -3,6 +3,7 @@ React JS / Bootstrap admin panel boilerplate
 
 ![CI](https://github.com/ilian6806/adminPanel/workflows/CI/badge.svg)
 ![Issues](https://img.shields.io/github/issues/ilian6806/adminPanel)
+![License](https://img.shields.io/github/license/ilian6806/adminPanel)
 
 ## Installation
 
