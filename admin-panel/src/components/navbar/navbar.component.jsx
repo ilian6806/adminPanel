@@ -104,6 +104,8 @@ const NavBar = () => {
                     </div>
                 </NavBarMenuWithSubmenus>
 
+                <NavBarMenu name="Utils" url="/utilities" icon="fa-tools" pathname={location.pathname} toggled={menuToggled} />
+
                 <hr className="sidebar-divider d-none d-md-block"/>
 
                 <div className="text-center d-none d-md-inline">

@@ -11302,3 +11302,7 @@ body.sidebar-toggled footer.sticky-footer {
   cursor: pointer;
 }
 
+.react-datepicker-wrapper, .react-datepicker__tab-loop {
+  display: inline-block !important;
+  width: auto !important;
+}
